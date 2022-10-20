@@ -36,11 +36,12 @@ def search_movies():
     # TODO: Feature 3
     movie_rating = ''
     if request.args:
+        submitted = True
         input_title = request.args.get('movie-name')
         found_movie = movie_repository.get_movie_by_title(input_title)
         if not found_movie:
-            return render_template('search_movies.html', search_active=True, movie_found=False)
+            return render_template('search_movies.html', search_active=True, movie_found=False, submitted=submitted)
         movie_rating = found_movie.rating
         print(movie_rating)
-        return render_template('search_movies.html', search_active=True, movie=found_movie, movie_found=True)
+        return render_template('search_movies.html', search_active=True, movie=found_movie, movie_found=True, submitted=submitted)
     return render_template('search_movies.html', search_active=True)
