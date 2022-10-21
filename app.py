@@ -5,7 +5,7 @@ from src.repositories.movie_repository import get_movie_repository
 app = Flask(__name__)
 
 movie_repository = get_movie_repository()
-movie_repository.create_movie("Spider-Man: No Way Home", "Marvel", "7.4")
+movie_repository.create_movie("Spider-Man: No Way Home", "Marvel", "4.8")
 
 @app.get('/')
 def index():
