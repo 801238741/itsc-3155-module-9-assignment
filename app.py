@@ -5,7 +5,7 @@ from src.repositories.movie_repository import get_movie_repository
 app = Flask(__name__)
 
 movie_repository = get_movie_repository()
-movie_repository.create_movie("Spider-Man: No Way Home (2021)", "Marvel", "7.4")
+movie_repository.create_movie("Spider-Man: No Way Home", "Marvel", "7.4")
 
 @app.get('/')
 def index():
@@ -35,13 +35,14 @@ def create_movie():
 def search_movies():
     # TODO: Feature 3
     movie_rating = ''
+    # if form is submitted/page is visited with input
     if request.args:
-        submitted = True
         input_title = request.args.get('movie-name')
         found_movie = movie_repository.get_movie_by_title(input_title)
+        # if movie not found, show message to add it to the database
         if not found_movie:
-            return render_template('search_movies.html', search_active=True, movie_found=False, submitted=submitted)
-        movie_rating = found_movie.rating
-        print(movie_rating)
-        return render_template('search_movies.html', search_active=True, movie=found_movie, movie_found=True, submitted=submitted)
+            return render_template('search_movies.html', search_active=True, submitted=True)
+        # otherwise if movie is found show the title and rating
+        return render_template('search_movies.html', search_active=True, movie=found_movie, submitted=True)
+    # if page was visited normally/without submitting form show the normal page
     return render_template('search_movies.html', search_active=True)

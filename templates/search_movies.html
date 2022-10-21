@@ -14,10 +14,24 @@
     </div>
 </form>
 {% if submitted %}
-{% if movie_found %}
-<div class="mt-3">
-    <h5>Movie Name: {{ movie.title }}</h5>
-    <h5>Rating: {{ movie.rating }}</h5>
+{% if movie %}
+<div class="mt-3 text-center">
+    <h5><span class="text-decoration-underline fw-normal"> Movie Name:</span> {{ movie.title }}</h5>
+    <h5><span class="text-decoration-underline fw-normal" >Rating:</span> {{ movie.rating }}/10</h5>
+</div>
+<div class="card w-25 mx-auto">
+    <div class="card-body">
+        <h5 class="card-title">
+            {{movie.title}}
+        </h5>
+        <h6 class="card-subtitle mb-2 text-muted">
+            Rating: {{movie.rating}}
+        </h6>
+        <p class="card-text">
+            This movie was directed by {{movie.director}}.
+        </p>
+        <a href="https://www.imdb.com/search/title/?title={{movie.title}}" target="_blank" class="card-link text-decoration-none">Look up on IMDb</a>
+    </div>
 </div>
 {% else %}
 <div class="mt-3 text-center">
