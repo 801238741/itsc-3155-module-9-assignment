@@ -3,7 +3,25 @@
 {% block title %}Movie Rating App | Search Movie Ratings{% endblock %}
 
 {% block body %}
+
 <h1 class="mb-5">Search Movie Ratings</h1>
 <p class="mb-3">Search for a movie rating below</p>
 <!-- TODO: Feature 3 -->
+<form method="GET" action="/movies/search">
+    <div class="form-group mt-2">
+      <label for="exampleInputEmail1">Moive Title</label>
+      <input type="text" class="form-control" id="searchTitle" name="searchTitle"aria-describedby="emailHelp" placeholder="Enter The Moive Title">
+    <button type="submit" class="btn btn-primary mt-2">Submit</button>
+    </div>
+  </form>
+{%if movieRating%}
+
+<h1>{{movieRating.title}}</h1>
+<h1>{{movieRating.director}}</h1>
+<h1>{{movieRating.rating}}</h1>
+{%else%}
+{{message}}
+{%endif%}
+
+
 {% endblock %}
