@@ -6,33 +6,4 @@
 <h1 class="mb-5">All Movies</h1>
 <p class="mb-3">See our list of movie ratings below</p>
 <!-- TODO: Feature 1 -->
-{% if dictionary|length != 0%}
-<table class="table table-hover">
-    <thead>
-      <tr scope="row">
-        <th>Title</th>
-        <th>Director</th>
-        <th>Rating</th>
-      </tr>
-    </thead>
-    <tbody>
-    {% for movie in movie_list %}
-     <tr>
-         <td> {{ order_num }}</td>
-         <td> {{ order_data[1] }} </td>
-         <td> {{ order_data[2] }} </td>
-         <td> ${{ order_data[3] }} </td>
-         <td>
-            <form action="/delete" method="post">
-                <input type="text" value="{{order_num}}" name="remove-btn" hidden>
-                <input class="btn btn-sm btn-danger" type="submit" value="Delete">
-            </form>
-        </td>
-     </tr>
-    {% endfor %}
-    </tbody>
-  </table>
-{% else %}
-<h1 class="text-center">No Orders Placed!</h1>
-{% endif %}
 {% endblock %}
