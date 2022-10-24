@@ -7,21 +7,42 @@
 <h1 class="mb-5">Search Movie Ratings</h1>
 <p class="mb-3">Search for a movie rating below</p>
 <!-- TODO: Feature 3 -->
-<form method="GET" action="/movies/search">
-    <div class="form-group mt-2">
-      <label for="exampleInputEmail1">Moive Title</label>
-      <input type="text" class="form-control" id="searchTitle" name="searchTitle"aria-describedby="emailHelp" placeholder="Enter The Moive Title">
-    <button type="submit" class="btn btn-primary mt-2">Submit</button>
+<form action="/movies/search" method="get">
+    <div class="form-group">
+        <input type="text" name="movie-name" id="movie-name" placeholder="Enter movie name" class="form-control"
+            required>
+        <button type="submit" class="btn btn-info mt-2">Search</button>
     </div>
-  </form>
-{%if movieRating%}
-
-<h1>{{movieRating.title}}</h1>
-<h1>{{movieRating.director}}</h1>
-<h1>{{movieRating.rating}}</h1>
-{%else%}
-{{message}}
+</form>
+{% if submitted %}
+{% if movie %}
+<div class="mt-3 text-center">
+    <h5><span class="text-decoration-underline fw-normal"> Movie Name:</span> {{ movie.title }}</h5>
+    <h5><span class="text-decoration-underline fw-normal">Rating:</span> {{ movie.rating }}/5</h5>
+</div>
+<!-- Card display of movie rating -->
+<div class="card w-25 mx-auto">
+    <div class="card-body">
+        <h5 class="card-title">
+            {{movie.title}}
+        </h5>
+        <h6 class="card-subtitle mb-2 text-muted">
+            Rating: {{movie.rating}}
+        </h6>
+        <p class="card-text">
+            This movie was directed by {{movie.director}}.
+        </p>
+        <div class="container">
+            <a href="https://www.imdb.com/search/title/?title={{movie.title.replace(' ', '+')}}" target="_blank"
+                class="text-decoration-none btn-outline-primary btn">Look up on IMDb</a>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="mt-3 text-center">
+    <h1>No Movie Found!</h2>
+        <p class="fs-2">Would you like to <a href="/movies/new" class="link-primary">Add It?</a></p>
+</div>
 {%endif%}
-
-
+{%endif%}
 {% endblock %}
