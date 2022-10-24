@@ -3,7 +3,28 @@
 {% block title %}Movie Rating App | All Movies{% endblock %}
 
 {% block body %}
+{%if result|length ==0%}
+<h1 class="h1 text-center mt-5 pt-5">No Moives Found In The Database. <a href="/movies/new">Click To Add Movies</a></h1>
+{%else%}
 <h1 class="mb-5">All Movies</h1>
 <p class="mb-3">See our list of movie ratings below</p>
-<!-- TODO: Feature 1 -->
+<table class="table table-hover mb-3 table-responsive-sm">
+    <thead>
+      <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Direactor</th>
+        <th scope="col">Rating</th>
+      </tr>
+    </thead>
+    <tbody class="table-group-divider">
+      {%for moives in result%}
+     <tr class="thead-light">
+         <td>{{moives.title}}</td>
+         <td>{{moives.director}}</td>
+         <td>{{moives.rating}}</td>
+     </tr>
+     {%endfor%}
+    </tbody>
+  </table>
+{%endif%}
 {% endblock %}
