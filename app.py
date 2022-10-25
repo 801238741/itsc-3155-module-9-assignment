@@ -34,7 +34,7 @@ def create_movie():
     movieRating = request.form.get('rating', type=int)
     
     if movieTitle is None or movieDirector is None or movieRating is None or movieRating < 0 or movieRating > 5:
-        message ="""<div class="alert alert-danger text-center" role="alert">Oops, You May Have Mis-Enter Few Info. <br>Please Follow The Instructions On The Text-Box</div>"""
+        message ="""<div class="alert alert-danger text-center" role="alert">Oops, You May Have Misentered Few Info. <br>Please Follow The Instructions On The Text-Box</div>"""
         return render_template('create_movies_form.html', create_rating_active=False, message=Markup(message))
     else:
         movie_repository.create_movie(movieTitle, movieDirector, movieRating)
