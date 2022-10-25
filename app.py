@@ -29,18 +29,17 @@ def create_movies_form():
 def create_movie():
     # TODO: Feature 2
     # After creating the movie in the database, we redirect to the list all movies page
+  
+    movieTitle = request.form.get('movieName')
+    movieDirector = request.form.get('directorName')
+    movieRating = request.form.get('rating', type=int)
     
-    moiveTitle = request.form.get('MoiveTitle')
-    moiveDireactor = request.form.get('direcatorName')
-    moiveRating = request.form.get('rating', type=int)
-    
-    if moiveTitle is None or moiveDireactor is None or moiveRating is None or moiveRating < 0 or moiveRating > 5:
+    if movieTitle is None or movieDirector is None or movieRating is None or movieRating < 0 or movieRating > 5:
         message ="""<div class="alert alert-danger text-center" role="alert">Oops, You May Have Mis-Enter Few Info. <br>Please Follow The Instructions On The Text-Box</div>"""
         return render_template('create_movies_form.html', create_rating_active=False, message=Markup(message))
     else:
-        movie_repository.create_movie(moiveTitle, moiveDireactor, moiveRating)
-    return redirect('/movies')
-
+        movie_repository.create_movie(movieTitle, movieDirector, movieRating)
+        return render_template('list_all_movies.html', result=movie_repository.get_all_movies())
 
 @app.get('/movies/search')
 def search_movies():
