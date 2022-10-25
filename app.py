@@ -21,7 +21,6 @@ def list_all_movies():
 
 @app.get('/movies/new')
 def create_movies_form():
-    
     return render_template('create_movies_form.html', create_rating_active=True)
 
 
@@ -30,8 +29,8 @@ def create_movie():
     # TODO: Feature 2
     # After creating the movie in the database, we redirect to the list all movies page
   
-    movieTitle = request.form.get('movieName')
-    movieDirector = request.form.get('directorName')
+    movieTitle = request.form.get('movieName', type=str)
+    movieDirector = request.form.get('movieDirector', type=str)
     movieRating = request.form.get('rating', type=int)
     
     if movieTitle is None or movieDirector is None or movieRating is None or movieRating < 0 or movieRating > 5:

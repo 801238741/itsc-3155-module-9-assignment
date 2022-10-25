@@ -8,14 +8,14 @@
 <p class="mb-3">Create a movie rating below</p>
 <!-- TODO: Feature 2 -->
 
-<form action="/createMovie" method="post">
+<form action="/movies" method="post">
     <div class="form-group" class="mb-3" style="padding-bottom: 12px">
         <label for="movieName" >Movie Name:</label>
-        <input type="text" name="movieName" class="form-control" id="movieName" placeholder="Ex: Spiderman" aria-describedby="emailHelp" required>
+        <input type="text" name="movieName" class="form-control" id="movieName" placeholder="Ex: Spiderman" aria-describedby="emailHelp" required autocomplete="off">
     </div>
     <div class="form-group" class="mb-3" style="padding-bottom: 12px">
         <label for="movieDirector">Movie Director:</label>
-        <input type="text" name="movieDirector" id="movieDirector" class="form-control" placeholder="Jon Watts" required>
+        <input type="text" name="movieDirector" id="movieDirector" class="form-control" placeholder="Jon Watts" required autocomplete="off">
     </div>
     <div class="form-group" class="mb-3" style="padding-bottom: 20px">
         <label for="rating">Rating:</label>
