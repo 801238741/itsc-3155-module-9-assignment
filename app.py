@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template
+from flask import Flask, redirect, render_template, request, Markup
 
 from src.repositories.movie_repository import get_movie_repository
 
@@ -27,7 +27,17 @@ def create_movies_form():
 def create_movie():
     # TODO: Feature 2
     # After creating the movie in the database, we redirect to the list all movies page
-    return redirect('/movies')
+    
+    movieTitle = request.form.get('movieName')
+    movieDirector = request.form.get('directorName')
+    movieRating = request.form.get('rating', type=int)
+    
+    if movieTitle is None or movieDirector is None or movieRating is None or movieRating < 0 or movieRating > 5:
+        message ="""<div class="alert alert-danger text-center" role="alert">Oops, You May Have Mis-Enter Few Info. <br>Please Follow The Instructions On The Text-Box</div>"""
+        return render_template('create_movies_form.html', create_rating_active=False, message=Markup(message))
+    else:
+        movie_repository.create_movie(movieTitle, movieDirector, movieRating)
+        return render_template('list_all_movies.html', result=movie_repository.get_all_movies())
 
 
 @app.get('/movies/search')
