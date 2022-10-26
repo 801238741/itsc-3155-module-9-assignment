@@ -23,7 +23,7 @@ def test_search_movies():
     assert add_movie_resp.status_code == 200
     #print(add_movie_resp.data)
     assert get_movie_repository().get_all_movies() != []
-    movie_title = movie_data_dictionary['movieName']
+    movie_title = str(movie_data_dictionary['movieName'])
     
     # search movie
     search_with_data_resp = test_app.get(f'/movies/search', query_string={'movie-name': movie_title})
@@ -32,9 +32,11 @@ def test_search_movies():
     # check 'movie details' section shows now
     assert b'<div class="mt-3 text-center">' in search_with_data_resp.data
     assert b'<span class="text-decoration-underline fw-normal">' in search_with_data_resp.data
+    assert b'<div class="card w-25 mx-auto">' in search_with_data_resp.data
     assert b'Tenet' in search_with_data_resp.data
     assert b'Christopher Nolan' in search_with_data_resp.data
     assert b'4' in search_with_data_resp.data
+    assert movie_repository.get_movie_by_title(movie_title).title == 'Tenet'
 
     # search a non-existing movie
     search_not_found_resp = test_app.get('/movies/search', query_string = {'movie-name' : 'fake'})
