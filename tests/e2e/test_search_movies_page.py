@@ -26,7 +26,7 @@ def test_search_movies():
     # search movie
     movie_title = movie_data_dictionary['movieName']
 
-    search_with_data_resp = test_app.get(f'/movies/search?movie-name={movie_title}')
+    search_with_data_resp = test_app.get(f'/movies/search', query_string={'movie-name': movie_title})
     assert b'<h1 class="mb-5">Search Movie Ratings</h1>' in search_with_data_resp.data
     # check 'movie details' section shows now
     print(search_with_data_resp.data)
