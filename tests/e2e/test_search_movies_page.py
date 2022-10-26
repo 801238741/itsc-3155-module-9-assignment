@@ -1,6 +1,5 @@
 # TODO: Feature 3
 from src.repositories.movie_repository import get_movie_repository
-from src.models.movie import Movie
 from app import app, movie_repository
 
 def test_search_movies():
@@ -37,6 +36,8 @@ def test_search_movies():
     assert b'Christopher Nolan' in search_with_data_resp.data
     assert b'4' in search_with_data_resp.data
     assert movie_repository.get_movie_by_title(movie_title).title == 'Tenet'
+    assert movie_repository.get_movie_by_title(movie_title).rating == 4
+    assert movie_repository.get_movie_by_title(movie_title).director == 'Christopher Nolan'
 
     # search a non-existing movie
     search_not_found_resp = test_app.get('/movies/search', query_string = {'movie-name' : 'fake'})
